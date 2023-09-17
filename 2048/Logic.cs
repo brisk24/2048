@@ -33,7 +33,7 @@ namespace _2048
 
         public void ShiftLeft()
         {
-
+            addNumbers();
         }
 
         public void ShiftRight()
@@ -66,7 +66,11 @@ namespace _2048
 
         public bool GameOver()
         {
-            return false;
+            for (int x = 0; x < size; x++)
+                for (int y = 0; y < size; y++)
+                    if (map[x, y] == 0)
+                        return false;
+                    return true;
         }
 
         private void combine()

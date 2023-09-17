@@ -80,12 +80,17 @@ namespace _2048
         {
             switch (e.KeyData)
             {
-                case Keys.Left: break;
-                case Keys.Right: break;
-                case Keys.Up: break;
-                case Keys.Down: break;
+                case Keys.Left: logic.ShiftLeft(); break;
+                case Keys.Right: logic.ShiftRight(); break;
+                case Keys.Up: logic.ShiftUp(); break;
+                case Keys.Down: logic.ShiftDown(); break;
                 case Keys.Escape: logic.InitGame(); break;
                 default: break;
+            }
+            if(logic.GameOver())
+            {
+                MessageBox.Show("Игра окончена!", "Внимание");
+                logic.InitGame();
             }
         }
     }
