@@ -33,22 +33,26 @@ namespace _2048
 
         public void ShiftLeft()
         {
-            addNumbers();
+            for (int y = 0; y < size; y++)
+                Shift(3, y, -1, 0);
         }
 
         public void ShiftRight()
         {
-
+            for (int y = 0; y < size; y++)
+                Shift(0, y, 1, 0);
         }
 
         public void ShiftUp()
         {
-
+            for (int x = 0; x < size; x++)
+                Shift(x, 3, 0, -1);
         }
 
         public void ShiftDown()
         {
-
+            for (int x = 0; x < size; x++)
+                Shift(x, 0, 0, 1);
         }
 
         private void addNumbers()
@@ -70,7 +74,28 @@ namespace _2048
                 for (int y = 0; y < size; y++)
                     if (map[x, y] == 0)
                         return false;
-                    return true;
+            return true;
+        }
+
+        private void Shift(int x, int y, int sx, int sy)
+        {
+            if (x + sx < 0 || x + sx >= size ||
+                y + sy < 0 || y + sy >= size)
+                return;
+
+            Shift(x + sx, y + sy, sx, sy);
+            if (map[x + sx, y + sy] == 0 &&
+                map[x, y] > 0)
+            {
+                map[x + sx, y + sy] = map[x, y];
+                map[x, y] = 0;
+                show(x + sx, y + sy, map[x + sx, y + sy]);
+                show(x, y, map[x, y]);
+                Shift(x + sx, y + sy, sx, sy);
+            }
+
+
+
         }
 
         private void combine()
