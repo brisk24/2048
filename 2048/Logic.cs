@@ -12,6 +12,7 @@ namespace _2048
         int[,] map;
         DelegateShow show;
         static Random rnd = new Random();
+        public bool moved;
         public Logic(int size, DelegateShow show)
         {
             this.size = size;
@@ -33,46 +34,54 @@ namespace _2048
 
         public void ShiftLeft()
         {
+            moved = false;
             for (int y = 0; y < size; y++)
             {
-                Shift(size-1, y, -1, 0);
+                Shift(size - 1, y, -1, 0);
                 combine(size - 1, y, -1, 0);
                 Shift(size - 1, y, -1, 0);
             }
-            addNumbers();
+            if (moved)
+                addNumbers();
         }
 
         public void ShiftRight()
         {
+            moved = false;
             for (int y = 0; y < size; y++)
             {
                 Shift(0, y, 1, 0);
                 combine(0, y, 1, 0);
                 Shift(0, y, 1, 0);
             }
-            addNumbers();
+            if (moved)
+                addNumbers();
         }
 
         public void ShiftUp()
         {
+            moved = false;
             for (int x = 0; x < size; x++)
             {
                 Shift(x, size - 1, 0, -1);
                 combine(x, size - 1, 0, -1);
                 Shift(x, size - 1, 0, -1);
             }
-            addNumbers();
+            if (moved)
+                addNumbers();
         }
 
         public void ShiftDown()
         {
+            moved = false;
             for (int x = 0; x < size; x++)
             {
                 Shift(x, 0, 0, 1);
                 combine(x, 0, 0, 1);
                 Shift(x, 0, 0, 1);
             }
-            addNumbers();
+            if (moved)
+                addNumbers();
         }
 
         private void addNumbers()
@@ -94,7 +103,16 @@ namespace _2048
                 for (int y = 0; y < size; y++)
                     if (map[x, y] == 0)
                         return false;
-            return true;
+
+            for (int x = 0; x < size - 1; x++)
+                for (int y = 0; y < size; y++)
+                    if (map[x, y] == map[x + 1, y])
+                        return false;
+            for (int x = 0; x < size; x++)
+                for (int y = 0; y < size-1; y++)
+                    if (map[x, y] == map[x,y + 1])
+                        return false;
+                    return true;
         }
 
         private void Shift(int x, int y, int sx, int sy)
@@ -112,6 +130,7 @@ namespace _2048
                 show(x + sx, y + sy, map[x + sx, y + sy]);
                 show(x, y, map[x, y]);
                 Shift(x + sx, y + sy, sx, sy);
+                moved = true;
             }
         }
 
@@ -130,6 +149,7 @@ namespace _2048
                 show(x + sx, y + sy, map[x + sx, y + sy]);
                 show(x, y, map[x, y]);
                 combine(x + sx, y + sy, sx, sy);
+                moved |= true;
             }
         }
     }
