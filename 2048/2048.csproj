@@ -55,6 +55,7 @@
     <Compile Include="Game2048.Designer.cs">
       <DependentUpon>Game2048.cs</DependentUpon>
     </Compile>
+    <Compile Include="Logic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Game2048.resx">

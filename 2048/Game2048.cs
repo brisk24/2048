@@ -16,19 +16,14 @@ namespace _2048
         static int size = 4;
         Label[,] box;
         Dictionary<int, Color> backColors;
+        Logic logic;
         public Game2048()
         {
             InitializeComponent();
             InitBackColors();
             InitLabels();
-            int j = 2;
-
-            for (int y = 0; y < size; y++)
-                for (int x = 0; x < size; x++)
-                {
-                    Show(x, y, j);
-                    j *= 2;
-                }
+            logic = new Logic(size, Show);
+            logic.InitGame();
         }
 
         void InitBackColors()
@@ -47,9 +42,6 @@ namespace _2048
                 g -= 10;
                 b -= 20;
             }
-
-
-
 
 
         }
@@ -92,7 +84,7 @@ namespace _2048
                 case Keys.Right: break;
                 case Keys.Up: break;
                 case Keys.Down: break;
-                case Keys.Escape: break;
+                case Keys.Escape: logic.InitGame(); break;
                 default: break;
             }
         }
