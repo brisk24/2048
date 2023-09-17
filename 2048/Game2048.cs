@@ -40,7 +40,7 @@ namespace _2048
             byte g = 224;
             byte b = 192;
 
-            for (int j = 1; j < 65536 * 2048; j *= 2)
+            for (int j = 1; j < 65536 * 2; j *= 2)
             {
                 backColors.Add(j, Color.FromArgb(r, g, b));
                 r -= 6;
@@ -71,6 +71,7 @@ namespace _2048
             Label label = new Label();
             label.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             label.Dock = System.Windows.Forms.DockStyle.Fill;
+            label.Margin = new Padding(2); 
             label.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             label.Text = "-";
             label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
