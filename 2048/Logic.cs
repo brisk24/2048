@@ -34,25 +34,45 @@ namespace _2048
         public void ShiftLeft()
         {
             for (int y = 0; y < size; y++)
-                Shift(3, y, -1, 0);
+            {
+                Shift(size-1, y, -1, 0);
+                combine(size - 1, y, -1, 0);
+                Shift(size - 1, y, -1, 0);
+            }
+            addNumbers();
         }
 
         public void ShiftRight()
         {
             for (int y = 0; y < size; y++)
+            {
                 Shift(0, y, 1, 0);
+                combine(0, y, 1, 0);
+                Shift(0, y, 1, 0);
+            }
+            addNumbers();
         }
 
         public void ShiftUp()
         {
             for (int x = 0; x < size; x++)
-                Shift(x, 3, 0, -1);
+            {
+                Shift(x, size - 1, 0, -1);
+                combine(x, size - 1, 0, -1);
+                Shift(x, size - 1, 0, -1);
+            }
+            addNumbers();
         }
 
         public void ShiftDown()
         {
             for (int x = 0; x < size; x++)
+            {
                 Shift(x, 0, 0, 1);
+                combine(x, 0, 0, 1);
+                Shift(x, 0, 0, 1);
+            }
+            addNumbers();
         }
 
         private void addNumbers()
@@ -93,14 +113,24 @@ namespace _2048
                 show(x, y, map[x, y]);
                 Shift(x + sx, y + sy, sx, sy);
             }
-
-
-
         }
 
-        private void combine()
+        private void combine(int x, int y, int sx, int sy)
         {
+            if (x + sx < 0 || x + sx >= size ||
+               y + sy < 0 || y + sy >= size)
+                return;
 
+            combine(x + sx, y + sy, sx, sy);
+            if (map[x + sx, y + sy] > 0 &&
+                map[x + sx, y + sy] == map[x, y])
+            {
+                map[x + sx, y + sy] *= 2;
+                map[x, y] = 0;
+                show(x + sx, y + sy, map[x + sx, y + sy]);
+                show(x, y, map[x, y]);
+                combine(x + sx, y + sy, sx, sy);
+            }
         }
     }
 }
