@@ -83,5 +83,17 @@ namespace _2048
             box[x, y].BackColor = backColors[number];
         }
 
+        private void Game2048_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyData)
+            {
+                case Keys.Left: break;
+                case Keys.Right: break;
+                case Keys.Up: break;
+                case Keys.Down: break;
+                case Keys.Escape: break;
+                default: break;
+            }
+        }
     }
 }

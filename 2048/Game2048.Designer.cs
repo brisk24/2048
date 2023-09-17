@@ -64,6 +64,7 @@
             this.Name = "Game2048";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "2048";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Game2048_KeyDown);
             this.ResumeLayout(false);
 
         }
