@@ -94,7 +94,7 @@ namespace _2048
             }
             if(logic.GameOver())
             {
-                MessageBox.Show("Игра окончена!", "Внимание");
+                MessageBox.Show("Игра окончена!", "Информация");
                 logic.InitGame();
             }
         }
